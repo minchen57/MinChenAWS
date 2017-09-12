@@ -1,6 +1,6 @@
 Created on 08/23/2017 by Min Chen
 
-#Setup the EC2 instance
+# Setup the EC2 instance
 - Started a Amazon Webservice account (Free Tier) and also registered as a student at AWS Educate. 
 - Launched one instance of Ubuntu Server (free one: t2.micro) on AWS
 - Log-in to the server:
@@ -34,7 +34,8 @@ Created on 08/23/2017 by Min Chen
     - Then typing http://minchen.technology/ in the browser will load the webpage. http://18.221.15.70/ will also work.
     - Then the apache service is restarted: `sudo service apache2 restart`
     
-# HTTPS Configuration [Instructions are found here](https://help.ubuntu.com/lts/serverguide/httpd.html)
+# HTTPS Configuration 
+    - [Instructions are found here](https://help.ubuntu.com/lts/serverguide/httpd.html)
     - Execute the following command at a terminal prompt to enable the mod_ssl module: `sudo a2enmod ssl`
     - To configure Apache2 for HTTPS, enter the following: `sudo a2ensite default-ssl`
     - With Apache2 now configured for HTTPS, restart the service to enable the new settings: `sudo systemctl restart apache2.service`
