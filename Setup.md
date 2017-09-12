@@ -35,8 +35,8 @@ Created on 08/23/2017 by Min Chen
     - Then the apache service is restarted: `sudo service apache2 restart`
     
 # HTTPS Configuration 
-    - [Instructions are found here](https://help.ubuntu.com/lts/serverguide/httpd.html)
-    - Execute the following command at a terminal prompt to enable the mod_ssl module: `sudo a2enmod ssl`
-    - To configure Apache2 for HTTPS, enter the following: `sudo a2ensite default-ssl`
-    - With Apache2 now configured for HTTPS, restart the service to enable the new settings: `sudo systemctl restart apache2.service`
-    - We should be able to access the page through by [https://minchen.technology].
+- [Instructions are found here](https://help.ubuntu.com/lts/serverguide/httpd.html)
+- Execute the following command at a terminal prompt to enable the mod_ssl module: `sudo a2enmod ssl`
+- To configure Apache2 for HTTPS, enter the following: `sudo a2ensite default-ssl`
+- With Apache2 now configured for HTTPS, restart the service to enable the new settings: `sudo systemctl restart apache2.service`
+- We should be able to access the page through by [https://minchen.technology].
