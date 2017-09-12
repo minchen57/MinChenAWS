@@ -40,3 +40,33 @@ Created on 08/23/2017 by Min Chen
 - To configure Apache2 for HTTPS, enter the following: `sudo a2ensite default-ssl`
 - With Apache2 now configured for HTTPS, restart the service to enable the new settings: `sudo systemctl restart apache2.service`
 - We should be able to access the page through by [https://minchen.technology].
+
+# To Obtain a CA signed Certificate for https:
+- Add the ppa for certbot (the python program that generates the certificate)
+    * `sudo add-apt-repository ppa:certbot/certbot`
+    * `sudo apt update`
+    * sudo apt install python-certbot-apache
+- Then simply run certbot witht he apache option to generate our keys (`sudo certbot --apache`)
+- When prompted by certbot, I specified the option to redirect all traffic to https
+- The cron config file was edited to run every 18th of the month at 1:30 am so that we do not have to manually renew the certificate.
+    *`crontab -e`
+    * Add the line `30 2 18 * * sudo certbot renew` to the end of crontab
+
+# Use Jekyll to generate website
+- Installed Jekyll for easy webpage design 
+- There were some prerequisite packages that had to be installed:
+    * ruby: `sudo apt install ruby ruby-dev`
+    * rubygems: installed by default with the ruby package in ubuntu
+    * make: `sudo apt install make`
+    * gcc: `sudo apt install gcc`
+- Then jekyll and bundler were installed: `sudo gem install jekyll`, `sudo gem install bundler`
+- I cloned the [repo](https://github.com/pietromenna/jekyll-cayman-theme) for jekyll-cayman-theme to create a jekyll site with this theme.
+- The folder on server is at home/ubuntu/jekyll-cayman-theme
+- if you cd into the directory for your jekyll project (above) and then run `jekyll build` it will generate the appropriate \_site folder with html generated from your markdown (index.markdown)
+- The contents of this folder are symlinked to a subfolder in /var/www/html/ by running the following command in folder /var/www/html/: 
+    ```
+    sudo su
+    rm -r html
+    ln .s /home/ubuntu/jekyll-cayman-theme html
+    ```
+- Finally, contents can be changed at home/ubuntu/jekyll-cayman-theme/index.markdown, buttons can be changed at home/ubuntu/jekyll-cayman-theme/\_includes/page-header.html. Other settings are in home/ubuntu/jekyll-cayman-theme/\_config.yml
