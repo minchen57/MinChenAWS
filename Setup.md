@@ -70,3 +70,55 @@ Created on 08/23/2017 by Min Chen
     ln .s /home/ubuntu/jekyll-cayman-theme html
     ```
 - Finally, contents can be changed at home/ubuntu/jekyll-cayman-theme/index.markdown, buttons can be changed at home/ubuntu/jekyll-cayman-theme/\_includes/page-header.html. Other settings are in home/ubuntu/jekyll-cayman-theme/\_config.yml
+
+# Install java
+- Oracle Java 8 required by some programs and it is not available on Debian archive due to licensing issues.To install Java 8 on Debian Jessie with minimum effort, you can use WebUpd8's Java PPA repositories. Follow the steps below:
+-   ```
+    sudo su -
+    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+    apt-get update
+    apt-get install oracle-java8-installer
+    ```
+- We can then check the version of java by `javac -version`
+
+# Install neo4j
+- [References for installation](https://medium.com/@Jessicawlm/installing-neo4j-on-ubuntu-14-04-step-by-step-guide-ed943ec16c56)
+-   ```
+    wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
+    echo 'deb http://debian.neo4j.org/repo stable/' >/tmp/neo4j.list
+    sudo apt-get update
+    sudo apt-get install neo4j
+    ```
+- To start, stop and restart the server:
+    ```
+    sudo service neo4j start
+    sudo service neo4j stop
+    sudo service neo4j restart
+    ```
+- The server can be accessed using `http://localhost:7474/browser/`
+
+- To allow remote access from other machine, open the /etc/neo4j/neo4j.conf and change the corresponding lines to:
+    ```
+    dbms.connector.bolt.listen_address=0.0.0.0:7687
+    dbms.connector.http.listen_address=0.0.0.0:7474
+    dbms.connector.https.listen_address=0.0.0.0:7473
+    ```
+- Now, I can access using: http://minchen.technology:7474/browser/ and the initial password is just neo4j. I have changed it to my favorite password.
+
+# Install spacy (for python3)
+- Install pip3 first: `sudo apt install python3-pip`
+- Run the following command:
+    ```
+    pip3 install -U spacy
+    sudo python3 -m spacy.en.download all
+    ```
+- Simple testing commands:
+    ```
+    python3
+    import spacy
+    nlp = spacy.load('en')
+    doc = nlp(u'Hello, spacy!')
+    print([(w.text, w.pos_) for w in doc])
+    ```
